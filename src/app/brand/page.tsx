@@ -12,6 +12,8 @@ import PricingSection from '@/components/Brand/PricingSection'
 import Footer from '@/components/Footer'
 import { Building2, TrendingUp, Users, Shield, Search, BarChart3 } from 'lucide-react'
 import { useAnalytics } from '@/lib/analytics'
+import { FixedAvatar } from '@/components/FixedAvatar'
+import Testimonials from '@/components/Testimonials'
 
 const brandFeatures = [
   {
@@ -99,21 +101,28 @@ export default function BrandPage() {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* <FixedAvatar /> */}
       <Header />
       
       <main>
         {/* Hero específico do design */}
         <HeroBrand />
 
+        
         <ClaraSection />
 
-        <FeatureSection
+        <Testimonials
+          // title="O que nossas marcas parceiras dizem"
+          // testimonials={brandTestimonials}
+        />
+
+        {/* <FeatureSection
           title="Tudo que sua marca precisa para dominar o marketing de influência"
           subtitle="Da descoberta de creators aos relatórios de ROI, nossa plataforma cobre cada etapa da sua estratégia."
           features={brandFeatures}
-        />
+        /> */}
 
-        <section className="py-24 sm:py-32 bg-crafy-gray-50">
+        {/* <section className="py-24 sm:py-32 bg-crafy-gray-50">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mx-auto max-w-2xl text-center">
               <h2 className="text-3xl font-bold tracking-tight text-crafy-gray-900 sm:text-4xl">
@@ -164,11 +173,13 @@ export default function BrandPage() {
               </dl>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Testimonials removidos conforme solicitação */}
 
-        <PartnerTopCreators />
+        {/* <PartnerTopCreators /> */}
+        
+        <FeatureSection mode="brand" />
 
         <PricingSection />
 

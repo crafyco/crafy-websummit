@@ -10,6 +10,7 @@ import Pricing from '@/components/Pricing'
 import Footer from '@/components/Footer'
 import { Zap, Users, BarChart3, Shield, Rocket, Target } from 'lucide-react'
 import { useAnalytics } from '@/lib/analytics'
+import Image from 'next/image'
 
 const mainFeatures = [
   {
@@ -126,9 +127,11 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header />
       
+      <Header />
+
       <main>
+
         <Hero
           title="Conecte sua marca com creators autênticos"
           subtitle="Web Summit Lisboa 2024"

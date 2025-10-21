@@ -13,7 +13,7 @@ const carouselItems = [
     body2:
       'Do not build an audience from zero. Borrow one from creators who are already trusted by your ideal customers. Get your message heard, loud and clear.',
     cta: 'Want to know more',
-    img: '/brand-card-1.svg',
+    img: '/images/clara_megafone.png',
   },
   {
     title: 'Find your perfect match',
@@ -22,7 +22,7 @@ const carouselItems = [
     body2:
       'Get suggested collaborations that feel organic and perform better across channels.',
     cta: 'Discover matches',
-    img: '/brand-card-2.svg',
+    img: '/images/clara_magnifying.png',
   },
   {
     title: 'Manage everything in one place',
@@ -31,7 +31,25 @@ const carouselItems = [
     body2:
       'Goodbye spreadsheets. Hello, streamlined workflows.',
     cta: 'See how it works',
-    img: '/brand-card-3.svg',
+    img: '/images/clara_notebook.png',
+  },
+  {
+    title: 'No need to be a marketing guru',
+    body1:
+      "You know you should be creating campaigns, but you don't have the time, the team, or honestly, the first clue where to start?",
+    body2:
+      'Think of us as your outsourced marketing team, without the agency fees or the headache.',
+    cta: 'See how it works',
+    img: '/images/clara_guru.png',
+  },
+  {
+    title: 'Turn authentic content into real sales.',
+    body1:
+      "People trust people, not ads. Let creators tell your story.",
+    body2:
+      'They drive more engagement and sales than traditional media, giving you a powerful new channel for customer acquisition.',
+    cta: 'See how it works',
+    img: '/images/clara_customer.png',
   },
 ]
 
@@ -63,9 +81,9 @@ export default function ClaraSection() {
     <section className="relative bg-[#fbf7f7] py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Header Clara */}
-        <div className="flex items-center gap-6">
-          <div className="relative h-24 w-24 sm:h-28 sm:w-28 rounded-full overflow-hidden shadow-md ring-2 ring-white bg-white">
-            <Image src="/images/clara_avatar.png" width={112} height={112} alt="Clara" className="object-cover" />
+        <div className="flex justify-center sm:flex-row flex-col items-center gap-6">
+          <div className="flex justify-center h-32 w-32 sm:h-28 sm:w-28 rounded-full overflow-hidden shadow-md ring-2 ring-white bg-white">
+            <Image className="object-cover justify-content-center" src="/images/clara_hello.png" width={136} height={136} alt="Clara" />
           </div>
           <div>
             <h3 className="text-[22px] sm:text-2xl font-extrabold text-crafy-gray-900">Meet “Clara”</h3>
@@ -113,11 +131,13 @@ export default function ClaraSection() {
                   className="snap-start shrink-0 w-[320px] sm:w-[560px] rounded-2xl border border-crafy-gray-200 bg-white shadow-sm hover:shadow-md transition-shadow"
                 >
                   <div className="flex items-center gap-6 p-8">
-                    <div className="flex-1">
-                      <h4 className="text-[36px] sm:text-[44px] leading-[1.05] font-extrabold tracking-tight text-crafy-gray-900">{card.title}</h4>
+                    <div className="flex mr-auto w-1/2 sm:w-full">
+                      <h4 className="text-[25px] sm:text-[30px] leading-[1.05] font-extrabold tracking-tight text-crafy-gray-900 overflow-visible whitespace-normal break-words">
+                        {card.title}
+                      </h4>
                     </div>
-                    <div className="h-24 w-24 sm:h-28 sm:w-28 rounded-full bg-crafy-gray-50 overflow-hidden flex items-center justify-center">
-                      <Image src={card.img} alt="card" width={112} height={112} />
+                    <div className="flex justify-center h-32 w-32 sm:h-32 sm:w-32 w-[30%] max-w-[30%] sm:w-auto sm:max-w-none rounded-full overflow-hidden shadow-md ring-2 ring-white bg-white">
+                      <Image className="object-cover justify-content-center" src={card.img} width={112} height={112} alt="Clara" />
                     </div>
                   </div>
                   <div className="px-8">
