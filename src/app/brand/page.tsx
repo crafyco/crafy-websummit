@@ -46,48 +46,6 @@ const brandFeatures = [
   }
 ]
 
-const brandTestimonials = [
-  {
-    content: 'Conseguimos aumentar nossa receita em 250% usando a Crafy para encontrar creators que realmente se conectam com nosso público.',
-    author: {
-      name: 'Carla Mendes',
-      role: 'Diretora de Marketing',
-      company: 'Fashion Forward',
-      avatar: ''
-    },
-    rating: 5
-  },
-  {
-    content: 'A plataforma nos poupou meses de trabalho manual. Agora conseguimos gerenciar 50+ creators em uma única campanha.',
-    author: {
-      name: 'Roberto Silva',
-      role: 'Head of Growth',
-      company: 'Tech Solutions',
-      avatar: ''
-    },
-    rating: 5
-  },
-  {
-    content: 'O ROI das nossas campanhas triplicou depois que começamos a usar os insights de audiência da Crafy.',
-    author: {
-      name: 'Lucia Santos',
-      role: 'CMO',
-      company: 'Beauty Brands',
-      avatar: ''
-    },
-    rating: 5
-  },
-  {
-    content: 'Finalmente uma plataforma que entende as necessidades das marcas corporativas. Compliance e resultados em primeiro lugar.',
-    author: {
-      name: 'Fernando Costa',
-      role: 'Marketing Director',
-      company: 'Global Corp',
-      avatar: ''
-    },
-    rating: 5
-  }
-]
 
 
 export default function BrandPage() {
