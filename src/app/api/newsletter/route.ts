@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
+import fs from 'fs'
+import path from 'path'
 
 export async function POST(request: NextRequest) {
   try {
@@ -22,19 +24,50 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Log subscription (in production, you would save to database or email service)
-    console.log('Newsletter Subscription:', {
+    // Save to JSON file
+    const dataDir = path.join(process.cwd(), 'data')
+    const filePath = path.join(dataDir, 'newsletter.json')
+
+    // Create data directory if it doesn't exist
+    if (!fs.existsSync(dataDir)) {
+      fs.mkdirSync(dataDir, { recursive: true })
+    }
+
+    // Read existing data or initialize empty array
+    let subscribers = []
+    if (fs.existsSync(filePath)) {
+      const fileContent = fs.readFileSync(filePath, 'utf-8')
+      subscribers = JSON.parse(fileContent)
+    }
+
+    // Check if email already exists
+    const existingSubscriber = subscribers.find((sub: any) => sub.email === email)
+    if (existingSubscriber) {
+      return NextResponse.json(
+        { 
+          success: true, 
+          message: 'Already subscribed to newsletter',
+          email
+        },
+        { status: 200 }
+      )
+    }
+
+    // Add new subscriber
+    const newSubscriber = {
+      id: Date.now().toString(),
       email,
       timestamp: new Date().toISOString(),
       source: 'website',
-    })
+    }
 
-    // TODO: In production, integrate with:
-    // - Email service (Mailchimp, SendGrid, ConvertKit, etc.)
-    // - Database (save to subscribers table)
-    // - Marketing automation platform
-    
-    // For now, we'll simulate a successful response
+    subscribers.push(newSubscriber)
+
+    // Save to file
+    fs.writeFileSync(filePath, JSON.stringify(subscribers, null, 2))
+
+    console.log('Newsletter Subscription saved:', newSubscriber)
+
     return NextResponse.json(
       { 
         success: true, 

@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
+import fs from 'fs'
+import path from 'path'
 
 export async function POST(request: NextRequest) {
   try {
@@ -22,23 +24,41 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Log submission (in production, you would save to database or send email)
-    console.log('Contact Form Submission:', {
+    // Save to JSON file
+    const dataDir = path.join(process.cwd(), 'data')
+    const filePath = path.join(dataDir, 'contacts.json')
+
+    // Create data directory if it doesn't exist
+    if (!fs.existsSync(dataDir)) {
+      fs.mkdirSync(dataDir, { recursive: true })
+    }
+
+    // Read existing data or initialize empty array
+    let contacts = []
+    if (fs.existsSync(filePath)) {
+      const fileContent = fs.readFileSync(filePath, 'utf-8')
+      contacts = JSON.parse(fileContent)
+    }
+
+    // Add new submission
+    const newContact = {
+      id: Date.now().toString(),
       name,
       email,
-      phone,
-      company,
-      message,
+      phone: phone || '',
+      company: company || '',
+      message: message || '',
       userType,
       timestamp: new Date().toISOString(),
-    })
+    }
 
-    // TODO: In production, integrate with:
-    // - Email service (SendGrid, AWS SES, etc.)
-    // - Database (save to contacts table)
-    // - CRM system (HubSpot, Salesforce, etc.)
-    
-    // For now, we'll simulate a successful response
+    contacts.push(newContact)
+
+    // Save to file
+    fs.writeFileSync(filePath, JSON.stringify(contacts, null, 2))
+
+    console.log('Contact Form Submission saved:', newContact)
+
     return NextResponse.json(
       { 
         success: true, 

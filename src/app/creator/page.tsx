@@ -8,9 +8,11 @@ import ClaraSection from '@/components/ClaraSection'
 import FeatureRollout from '@/components/FeatureRollout'
 import NewsletterSection from '@/components/Brand/NewsletterSection'
 import { useAnalytics } from '@/lib/analytics'
+import { useContactForm } from '@/contexts/ContactFormContext'
 
 export default function CreatorPage() {
   const analytics = useAnalytics()
+  const { openModal } = useContactForm()
 
   useEffect(() => {
     analytics.page(window.location.pathname, 'Creator Page - Crafy')
@@ -58,7 +60,10 @@ export default function CreatorPage() {
             
             {/* CTA Button */}
             <div className="mt-8 flex justify-center lg:justify-start">
-              <button className="rounded-md bg-[#CB2C30] px-7 py-4 text-center font-raleway font-semibold text-lg lg:text-xl text-white shadow-sm hover:bg-[#B32529] transition-all duration-200">
+              <button 
+                onClick={openModal}
+                className="rounded-md bg-[#CB2C30] px-7 py-4 text-center font-raleway font-semibold text-lg lg:text-xl text-white shadow-sm hover:bg-[#B32529] transition-all duration-200"
+              >
                 Want to know more
               </button>
             </div>

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter, Raleway } from 'next/font/google'
 import "./globals.css";
 import { Analytics } from '@vercel/analytics/react';
+import { ContactFormProvider } from '@/contexts/ContactFormContext';
+import GlobalContactModal from '@/components/GlobalContactModal';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -57,8 +59,11 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
       </head>
       <body className={`font-sans antialiased`}>
-        {children}
-        <Analytics />
+        <ContactFormProvider>
+          {children}
+          <GlobalContactModal />
+          <Analytics />
+        </ContactFormProvider>
       </body>
     </html>
   );
