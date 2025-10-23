@@ -38,11 +38,7 @@ export default function Home() {
         <div className="max-w-6xl w-full">
           {/* Header Text */}
           <div className="text-center mb-16 space-y-6">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-200 shadow-sm mb-6">
-              <span className="w-2 h-2 bg-[#CB2C30] rounded-full"></span>
-              <span className="font-raleway text-sm text-[#6B7280]">Powered by AI</span>
-            </div>
-            
+
             <h1 className="font-raleway font-bold text-5xl sm:text-6xl lg:text-7xl text-[#111827] leading-tight">
               Connect brands with{' '}
               <span className="text-[#CB2C30]">

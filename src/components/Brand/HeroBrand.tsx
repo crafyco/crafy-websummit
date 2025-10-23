@@ -27,7 +27,6 @@ export default function HeroBrand() {
 
             {/* Badges */}
             <div className="flex mt-6 items-center gap-3">
-              <span className="inline-flex items-center rounded-full bg-crafy-red/10 px-3 py-1 text-xs font-medium text-crafy-red">Powered by AI</span>
               <span className="inline-flex items-center rounded-full bg-crafy-gray-100 px-3 py-1 text-xs font-medium text-crafy-gray-700">Boost your brand</span>
             </div>
 

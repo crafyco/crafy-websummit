@@ -34,11 +34,8 @@ export default function CreatorPage() {
       <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-8 pt-6 sm:pt-12 lg:pt-16 pb-12 sm:pb-20">
         <div className="lg:flex lg:items-center lg:gap-x-12">
           <div className="mx-auto max-w-2xl lg:mx-0 lg:flex-auto">
-            {/* Powered by AI Badge */}
             <div className="flex justify-center lg:justify-start mb-8">
               <div className="relative flex items-center gap-x-4 rounded-full bg-white px-4 py-1 ring-1 ring-gray-900/10 hover:ring-gray-900/20 transition-all">
-                <span className="font-raleway font-semibold text-sm text-[#4F46E5]">Powered by AI</span>
-                <div className="h-4 w-px bg-gray-900/10" />
                 <span className="font-raleway text-sm text-[#4B5563]">Boost your brand</span>
               </div>
             </div>
