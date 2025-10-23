@@ -1,12 +1,4 @@
-import React from 'react';
-import Image from 'next/image';
-
-import logo from "@images/logo-simbolo-vermelho.png";
-// import deeplycoffeeLogo from "@images/testimonials/deeplycoffee.jpg";
-// import orlandofarmersmarketLogo from "@images/testimonials/orlandofarmersmarket.jpg";
-// import thetearoomexperienceLogo from "@images/testimonials/thetearoomexperience.jpg";
-// import ac_orlando_downtownLogo from "@images/testimonials/ac_orlando_downtown.jpg";
-// import coronacigardowntownoLogo from "@images/testimonials/coronacigardowntowno.jpg";
+'use client'
 
 const featuredTestimonial = {
     body: "Clara understood our brand in minutes and found the perfect creators. We were live in less than a week!!",
@@ -15,7 +7,7 @@ const featuredTestimonial = {
         handle: 'coronacigardowntowno',
         imageUrl: '/images/testimonials/coronacigardowntowno.jpg',
     },
-};
+}
 
 const testimonials = [
     [
@@ -31,7 +23,7 @@ const testimonials = [
         ],
         [
             {
-                body: "One day, perfect creators, ready-to-launch campaigns. Couldn’t be simpler.",
+                body: "One day, perfect creators, ready-to-launch campaigns. Couldn't be simpler.",
                 author: {
                     name: 'Orlando Farmers Market',
                     handle: 'orlandofarmersmarket',
@@ -53,7 +45,7 @@ const testimonials = [
         ],
         [
             {
-                body: "I’m not a marketer, but Clara made it easy. Perfect creators and campaign in minutes!",
+                body: "I'm not a marketer, but Clara made it easy. Perfect creators and campaign in minutes!",
                 author: {
                     name: 'AC Hotel',
                     handle: 'ac_orlando_downtown',
@@ -62,11 +54,12 @@ const testimonials = [
             },
         ],
     ],
-];
+]
 
-const Testimonials = () => {
+export default function Testimonials() {
     return (
-        <div className="relative">
+        <section className="relative py-16 sm:py-24 lg:py-32">
+            {/* Background gradients */}
             <div className="absolute inset-x-0 top-1/2 -z-10 -translate-y-1/2 transform-gpu overflow-hidden opacity-30 blur-3xl" aria-hidden="true">
                 <div
                     className="ml-[max(50%,38rem)] aspect-[1313/771] w-[82.0625rem] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc]"
@@ -85,27 +78,35 @@ const Testimonials = () => {
                     }}
                 />
             </div>
-            <div className="mx-auto max-w-7xl py-12 px-6 lg:px-8">
-                <div className="mx-auto max-w-2xl sm:text-center">
-                    <h2 className="text-base/7 font-semibold text-primary">TESTIMONIALS</h2>
-                    <p className="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-balance sm:text-5xl">
-                        We work with thousands of amazing people.
+            
+            <div className="mx-auto max-w-7xl px-6 lg:px-8">
+                {/* Header */}
+                <div className="mx-auto max-w-2xl text-center mb-16 sm:mb-20">
+                    <p className="font-raleway font-semibold text-base text-[#CB2C30] mb-2">
+                        TESTIMONIALS
                     </p>
+                    <h2 className="font-raleway font-semibold text-4xl sm:text-5xl tracking-tight text-[#111827]">
+                        We work with thousands of amazing people.
+                    </h2>
                 </div>
-                <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 grid-rows-1 gap-8 text-sm/6 text-gray-900 sm:mt-20 sm:grid-cols-2 xl:mx-0 xl:max-w-none xl:grid-flow-col xl:grid-cols-4">
-                    <figure className="col-span-2 hidden sm:block sm:rounded-2xl bg-white sm:shadow-lg sm:ring-1 sm:ring-gray-900/5 xl:col-start-2 xl:row-end-1">
-                        <blockquote className="p-12 text-xl/8 font-semibold tracking-tight text-gray-900">
-                            <p>{`“${featuredTestimonial.body}”`}</p>
+                {/* Testimonials Grid */}
+                <div className="mx-auto grid max-w-2xl grid-cols-1 gap-8 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-4">
+                    {/* Featured large testimonial */}
+                    <figure className="col-span-2 rounded-2xl bg-[#FAF7F7] p-6 sm:p-8 shadow-lg ring-1 ring-gray-900/5 xl:col-start-2 xl:row-end-1">
+                        <blockquote className="font-raleway font-semibold text-lg sm:text-xl leading-8 tracking-tight text-[#111827] mb-8">
+                            <p>&ldquo;{featuredTestimonial.body}&rdquo;</p>
                         </blockquote>
-                        <figcaption className="flex items-center gap-x-4 border-t border-gray-900/10 px-6 py-4">
-                            <Image width={112} height={112} className="h-10 w-10 flex-none rounded-full bg-gray-50" src={featuredTestimonial.author.imageUrl} alt="" />
-                            <div className="flex-auto">
-                                <div className="font-semibold">{featuredTestimonial.author.name}</div>
-                                <div className="text-gray-600">{`@${featuredTestimonial.author.handle}`}</div>
+                        <figcaption className="flex items-center gap-x-4 border-t border-gray-900/10 pt-6">
+                            <div className="h-10 w-10 rounded-full bg-gray-50 overflow-hidden flex-none">
+                                <div className="w-full h-full bg-gradient-to-br from-[#CB2C30] to-[#ED393D]" />
                             </div>
-                            <Image width={112} height={112} className="h-10 w-auto flex-none" src="/images/logo-simbolo-vermelho.png" alt="" />
+                            <div className="flex-auto">
+                                <div className="font-raleway font-semibold text-sm text-[#111827]">{featuredTestimonial.author.name}</div>
+                                <div className="font-raleway text-sm text-[#4B5563]">@{featuredTestimonial.author.handle}</div>
+                            </div>
                         </figcaption>
                     </figure>
+                    {/* Other testimonials */}
                     {testimonials.map((columnGroup, columnGroupIdx) => (
                         <div key={columnGroupIdx} className="space-y-8 xl:contents xl:space-y-0">
                             {columnGroup.map((column, columnIdx) => (
@@ -119,15 +120,17 @@ const Testimonials = () => {
                                     } space-y-8`}
                                 >
                                     {column.map((testimonial) => (
-                                        <figure key={testimonial.author.handle} className="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-900/5">
-                                            <blockquote className="text-gray-900">
-                                                <p>{`“${testimonial.body}”`}</p>
+                                        <figure key={testimonial.author.handle} className="rounded-2xl bg-[#FAF7F7] p-6 shadow-lg ring-1 ring-gray-900/5">
+                                            <blockquote className="font-raleway text-sm leading-6 text-[#111827] mb-6">
+                                                <p>&ldquo;{testimonial.body}&rdquo;</p>
                                             </blockquote>
-                                            <figcaption className="mt-6 flex items-center gap-x-4">
-                                                <Image width={112} height={112} className="h-10 w-10 rounded-full bg-gray-50" src={testimonial.author.imageUrl} alt="" />
-                                                <div>
-                                                    <div className="font-semibold">{testimonial.author.name}</div>
-                                                    <div className="text-gray-600">{`@${testimonial.author.handle}`}</div>
+                                            <figcaption className="flex items-center gap-x-4">
+                                                <div className="h-10 w-10 rounded-full bg-gray-50 overflow-hidden flex-none">
+                                                    <div className="w-full h-full bg-gradient-to-br from-[#4F46E5] to-[#9089FC]" />
+                                                </div>
+                                                <div className="flex-auto">
+                                                    <div className="font-raleway font-semibold text-sm text-[#111827]">{testimonial.author.name}</div>
+                                                    <div className="font-raleway text-sm text-[#4B5563]">@{testimonial.author.handle}</div>
                                                 </div>
                                             </figcaption>
                                         </figure>
@@ -138,8 +141,6 @@ const Testimonials = () => {
                     ))}
                 </div>
             </div>
-        </div>
-    );
-};
-
-export default Testimonials;
+        </section>
+    )
+}

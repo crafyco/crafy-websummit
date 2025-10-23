@@ -3,10 +3,17 @@ import posthog from 'posthog-js';
 
 // Initialize PostHog (only on client-side)
 if (typeof window !== 'undefined') {
-  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY || 'dev', {
-    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://app.posthog.com',
-    capture_pageview: false, // Disable automatic pageview capture, as we capture manually
-  });
+  const posthogKey = process.env.NEXT_PUBLIC_POSTHOG_KEY;
+  
+  // Only initialize PostHog if key is properly configured (not the placeholder)
+  if (posthogKey && posthogKey !== 'your_posthog_key_here') {
+    posthog.init(posthogKey, {
+      api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://app.posthog.com',
+      capture_pageview: false, // Disable automatic pageview capture, as we capture manually
+    });
+  } else if (process.env.NODE_ENV === 'development') {
+    console.log('📊 PostHog not initialized - no valid key configured');
+  }
 }
 
 export const analytics = {

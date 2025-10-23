@@ -135,6 +135,7 @@ export default function Hero({
           >
             <div className="relative mx-auto max-w-lg">
               {heroImage ? (
+                  // eslint-disable-next-line @next/next/no-img-element
                 <img
                   className="w-full rounded-2xl shadow-xl"
                   src={heroImage}

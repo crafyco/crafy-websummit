@@ -1,103 +1,67 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
-import { Menu, X } from 'lucide-react'
-import { Button } from './ui/button'
-import { motion, AnimatePresence } from 'framer-motion'
+import { usePathname } from 'next/navigation'
 import Image from 'next/image'
 import { FixedAvatar } from './FixedAvatar'
 
-
-const navigation = [
-  { name: 'Brand', href: '/brand' },
-  { name: 'Creator', href: '/creator' },
-]
-
 export default function Header() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const pathname = usePathname()
+  const isBrandPage = pathname === '/brand'
+  const isCreatorPage = pathname === '/creator'
 
   return (
-    <header className="bg-white shadow-sm top-0 z-50">
-
-      <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
+    <header className="bg-white shadow-sm sticky top-0 z-50">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8" aria-label="Global">
+        {/* Logo */}
         <div className="flex lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5">
-            <div className='w-28 sm:w-48 sm:mt-4'>
-              <Image className="object-contain justify-content-center" src="/images/logo-horizontal-preta.png" width={1024} height={1024} alt="Crafy" />
+            <div className="w-32 sm:w-48">
+              <Image 
+                className="object-contain" 
+                src="/images/logo-horizontal-preta.png" 
+                width={1024} 
+                height={1024} 
+                alt="Crafy"
+                priority
+              />
             </div>
           </Link>
         </div>
 
-        
-        <FixedAvatar />
-
-
-        {/* <div className="hidden lg:flex lg:gap-x-12">
-     {navigation.map((item) => (
-      <Link
-       key={item.name}
-       href={item.href}
-       className="text-sm font-semibold leading-6 text-crafy-gray-900 hover:text-crafy-red transition-colors"
-      >
-       {item.name}
-      </Link>
-     ))}
-    </div> */}
-      </nav>
-
-
-      {/* Mobile menu */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="lg:hidden fixed inset-0 z-50"
-          >
-            <div className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-crafy-gray-900/10">
-              <div className="flex items-center justify-between">
-                <Link href="/" className="-m-1.5 p-1.5">
-                  <span className="sr-only">Crafy</span>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-8 h-8 bg-crafy-red rounded-lg flex items-center justify-center">
-                      <span className="text-white font-bold text-lg">C</span>
-                    </div>
-                    <span className="text-xl font-bold text-crafy-gray-900">Crafy</span>
-                  </div>
-                </Link>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => setMobileMenuOpen(false)}
-                  trackingId="mobile-menu-close"
-                  trackingLocation="header"
-                >
-                  <span className="sr-only">Close menu</span>
-                  <X className="h-6 w-6" aria-hidden="true" />
-                </Button>
-              </div>
-              <div className="mt-6 flow-root">
-                <div className="-my-6 divide-y divide-crafy-gray-500/10">
-                  <div className="space-y-2 py-6">
-                    {navigation.map((item) => (
-                      <Link
-                        key={item.name}
-                        href={item.href}
-                        className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-crafy-gray-900 hover:bg-crafy-gray-50"
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        {item.name}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
+        {/* Brand/Creator Toggle - Centered */}
+        {(isBrandPage || isCreatorPage) && (
+          <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2">
+            <span className="isolate inline-flex rounded-md shadow-sm bg-white/[0.01]">
+              <Link
+                href="/brand"
+                className={`relative inline-flex items-center rounded-l-md px-3 py-2 font-raleway font-semibold text-xl ring-1 ring-inset focus:z-10 h-11 transition-all duration-200 ${
+                  isBrandPage 
+                    ? 'bg-[#CB2C30] text-white ring-[#3B82F6]/50' 
+                    : 'bg-white text-[#111827] ring-[#D1D5DB] hover:bg-gray-50'
+                }`}
+              >
+                Brand
+              </Link>
+              <Link
+                href="/creator"
+                className={`relative inline-flex items-center rounded-r-md px-3 py-2 font-raleway font-semibold text-xl ring-1 ring-inset focus:z-10 h-11 transition-all duration-200 ${
+                  isCreatorPage 
+                    ? 'bg-[#CB2C30] text-white ring-[#3B82F6]/50' 
+                    : 'bg-white text-[#111827] ring-[#D1D5DB] hover:bg-gray-50'
+                }`}
+              >
+                Creator
+              </Link>
+            </span>
+          </div>
         )}
-      </AnimatePresence>
+        
+        {/* Avatar */}
+        <div className="flex items-center lg:flex-1 lg:justify-end">
+          <FixedAvatar />
+        </div>
+      </nav>
     </header>
   )
 }

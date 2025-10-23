@@ -17,51 +17,50 @@ export default function NewsletterSection() {
         setIsSubmitting(true)
         analytics.click('newsletter-subscribe', 'brand-newsletter')
 
-        // Simulate API call
-        setTimeout(() => {
+        try {
+            const response = await fetch('/api/newsletter', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email }),
+            })
+
+            if (!response.ok) {
+                throw new Error('Failed to subscribe')
+            }
+
             setIsSubmitted(true)
-            setIsSubmitting(false)
             setEmail('')
 
             // Reset after 3 seconds
             setTimeout(() => setIsSubmitted(false), 3000)
-        }, 1000)
+        } catch (error) {
+            console.error('Newsletter subscription error:', error)
+            alert('Failed to subscribe. Please try again.')
+        } finally {
+            setIsSubmitting(false)
+        }
     }
 
     return (
-        <section className="relative isolate overflow-hidden bg-white m-4 sm:m-24 px-6 py-24 shadow-2xl rounded-3xl sm:px-24 xl:py-32">
-            
-            {/* Background Gradient Blobs */}
-            <div className="absolute -top-40 -left-60 -z-10 transform-gpu blur-3xl" aria-hidden="true">
-                <div
-                    className="aspect-[1155/678] w-[72.1875rem] bg-gradient-to-tr from-[#9089fc] to-[#c3bfff] opacity-20"
-                    style={{
-                        clipPath: 'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)'
-                    }}
-                />
+        <section className="relative isolate overflow-hidden bg-[#FAF7F7] mx-6 my-16 sm:mx-24 sm:my-24 px-6 py-24 shadow-2xl rounded-3xl sm:px-24 xl:py-32 border border-[#E5E7EB]">
+            {/* Background gradients */}
+            <div className="absolute -bottom-full -left-1/2 -z-10 transform-gpu blur-3xl" aria-hidden="true">
+                <div className="aspect-square w-[1024px] bg-gradient-to-br from-[#ED393D]/70 to-[#CB2C30]/0 opacity-50" />
             </div>
-            <div className="absolute -bottom-40 -left-20 -z-10 transform-gpu blur-3xl" aria-hidden="true">
-                <div
-                    className="aspect-[1155/678] w-[72.1875rem] bg-gradient-to-tr from-[#ff80b5] to-[#f5507b] opacity-20"
-                    style={{
-                        clipPath: 'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)'
-                    }}
-                />
+            <div className="absolute -top-full -right-1/2 -z-10 transform-gpu blur-3xl" aria-hidden="true">
+                <div className="aspect-square w-[1024px] bg-gradient-to-tl from-[#ED393D]/70 to-[#CB2C30]/0 opacity-50" />
             </div>
-            <div className="absolute -top-20 -right-40 -z-10 transform-gpu blur-3xl" aria-hidden="true">
-                <div
-                    className="aspect-[1155/678] w-[72.1875rem] bg-gradient-to-tl from-[#ff80b5] to-[#f5507b] opacity-20"
-                    style={{
-                        clipPath: 'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)'
-                    }}
-                />
+            <div className="absolute top-0 left-0 -z-10 transform-gpu blur-3xl" aria-hidden="true">
+                <div className="aspect-square w-[1024px] bg-gradient-to-br from-[#393CED]/70 to-[#CB2C30]/0 opacity-30" />
             </div>
             
             <div>
-                <h2 className="mx-auto max-w-3xl text-center text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
+                <h2 className="mx-auto max-w-3xl text-center font-raleway font-semibold text-4xl sm:text-5xl tracking-tight text-[#111827] sm:text-[#000000]">
                     Subscribe to our Newsletter!
                 </h2>
-                <p className="mx-auto mt-6 max-w-lg text-center text-lg text-gray-600">
+                <p className="mx-auto mt-6 max-w-lg text-center font-raleway text-lg text-[#4B5563] sm:text-[#000000]">
                     Stay updated with the latest news! Sign up with your email to receive exclusive updates directly in your inbox.
                 </p>
 
@@ -78,16 +77,16 @@ export default function NewsletterSection() {
                             onChange={(e) => setEmail(e.target.value)}
                             autoComplete="email"
                             required
-                            className="min-w-0 flex-auto rounded-md border-0 bg-white px-3.5 py-2 text-gray-900 placeholder-gray-500 shadow-sm ring-1 ring-inset ring-gray-900/10 focus:ring-2 focus:ring-inset focus:ring-blue-500 sm:text-sm/6"
+                            className="min-w-0 flex-auto rounded-md border-0 bg-white px-3.5 py-2 font-raleway text-sm text-[#6B7280] placeholder:text-[#757575] shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-[#CB2C30]"
                             placeholder="Enter your email"
                             disabled={isSubmitting}
                         />
                         <Button
                             type="submit"
                             disabled={isSubmitting}
-                            className="flex-none rounded-md bg-red-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 disabled:opacity-50"
+                            className="flex-none rounded-md bg-[#CB2C30] px-3.5 py-2.5 font-raleway font-semibold text-sm text-white shadow-sm hover:bg-[#B32529] transition-all duration-200 disabled:opacity-50"
                         >
-                            {isSubmitting ? 'Subscribing...' : 'Subscribe'}
+                            {isSubmitting ? 'Subscribing...' : 'subscribe'}
                         </Button>
                     </form>
                 ) : (

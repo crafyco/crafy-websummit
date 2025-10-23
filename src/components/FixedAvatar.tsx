@@ -2,10 +2,12 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import ContactFormModal from './ContactFormModal';
 
 export function FixedAvatar() {
   const [isLargeMargin, setIsLargeMargin] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -55,7 +57,10 @@ export function FixedAvatar() {
         </div>
       </div>
 
-      <div className='flex h-full w-full rounded-full overflow-hidden shadow-md ring-2 ring-white bg-white cursor-pointer hover:scale-105 transition-transform duration-300'>
+      <div 
+        className='flex h-full w-full rounded-full overflow-hidden shadow-md ring-2 ring-white bg-white cursor-pointer hover:scale-105 transition-transform duration-300'
+        onClick={() => setIsModalOpen(true)}
+      >
         <Image
           className="object-cover"
           src="/images/clara_avatar.png"
@@ -64,6 +69,11 @@ export function FixedAvatar() {
           alt="Clara"
         />
       </div>
+
+      <ContactFormModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+      />
     </div>
   );
 }

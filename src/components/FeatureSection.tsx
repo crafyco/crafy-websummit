@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  ChartBarSquareIcon,
   ChatBubbleBottomCenterTextIcon,
   CloudArrowUpIcon,
   CommandLineIcon,
@@ -8,7 +7,6 @@ import {
   MagnifyingGlassCircleIcon,
   UserGroupIcon
 } from "@heroicons/react/20/solid";
-// import featureImg from "@images/feature.png";
 import Image from 'next/image';
 
 const primaryFeatures = {

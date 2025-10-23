@@ -38,71 +38,64 @@ export default function PricingSection() {
   }
 
   return (
-    <section className="isolate overflow-hidden" id="pricing">
-      <div className="mx-auto max-w-7xl px-6 pb-96 pt-24 text-center sm:pt-32 lg:px-8">
-        <div className="mx-auto max-w-4xl">
-          <h2 className="text-base/7 font-semibold text-crafy-red">
+    <section className="isolate overflow-hidden bg-[#FAF7F7] py-16 sm:py-24 lg:py-32" id="pricing">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        {/* Header */}
+        <div className="mx-auto max-w-4xl text-center mb-16">
+          <p className="font-raleway font-semibold text-base text-[#ED393D] mb-2">
             Pricing
-          </h2>
-          <p className="mt-2 text-balance text-5xl font-semibold tracking-tight text-crafy-gray-900 sm:text-6xl">
-            Choose the right plan for you
           </p>
-        </div>
-        <div className="relative mt-6">
-          <p className="mx-auto max-w-2xl text-pretty text-lg font-medium text-crafy-gray-600 sm:text-xl/8">
+          <h2 className="font-raleway font-semibold text-5xl sm:text-6xl tracking-tight text-[#CB2C30] mb-6">
+            Choose the right plan for you
+          </h2>
+          <p className="font-raleway font-medium text-lg sm:text-xl text-[#9CA3AF] max-w-3xl mx-auto">
             Choose an affordable plan that&apos;s packed with the best features for engaging your audience, creating customer loyalty, and driving sales.
           </p>
         </div>
-      </div>
-      
-      <div className="flow-root pb-10 sm:pb-16">
-        <div className="-mt-80">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="mx-auto grid max-w-md grid-cols-1 gap-8 lg:max-w-4xl lg:grid-cols-2">
-              {tiers.map((tier) => (
-                <div 
-                  key={tier.id} 
-                  className="flex flex-col justify-between rounded-3xl bg-white p-8 shadow-xl ring-1 ring-gray-900/10 sm:p-10"
-                >
-                  <div>
-                    <h3 className="text-base/7 font-semibold text-crafy-red">
-                      {tier.name}
-                    </h3>
-                    <div className="mt-4 flex items-baseline gap-x-2">
-                      <span className="text-5xl font-semibold tracking-tight text-gray-900">
-                        {tier.priceMonthly}
-                      </span>
-                      <span className="text-base/7 font-semibold text-gray-600">
-                        /month
-                      </span>
-                    </div>
-                    <p className="mt-6 text-base/7 text-gray-600">
-                      {tier.description}
-                    </p>
-                    <ul role="list" className="mt-10 space-y-4 text-sm/6 text-gray-600">
-                      {tier.features.map((feature) => (
-                        <li key={feature} className="flex gap-x-3">
-                          <CheckIcon 
-                            className="h-6 w-5 flex-none text-crafy-red" 
-                            aria-hidden="true" 
-                          />
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <Button
-                    onClick={() => handlePlanSelect(tier.name)}
-                    className="mt-8 w-full rounded-md bg-crafy-red px-3.5 py-2 text-center text-sm/6 font-semibold text-white shadow-sm hover:bg-crafy-red/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crafy-red"
-                    trackingId={`pricing-${tier.name.toLowerCase()}`}
-                    trackingLocation="brand-pricing"
-                  >
-                    Get started today
-                  </Button>
+        {/* Pricing Cards */}
+        <div className="mx-auto grid max-w-md grid-cols-1 gap-8 lg:max-w-4xl lg:grid-cols-2">
+          {tiers.map((tier) => (
+            <div 
+              key={tier.id} 
+              className="flex flex-col justify-between rounded-3xl bg-white p-8 sm:p-10 shadow-xl ring-1 ring-gray-900/10"
+            >
+              <div>
+                <h3 className="font-raleway font-semibold text-base text-[#CB2C30]">
+                  {tier.name}
+                </h3>
+                <div className="mt-4 flex items-baseline gap-x-2">
+                  <span className="font-raleway font-semibold text-5xl tracking-tight text-[#111827]">
+                    {tier.priceMonthly}
+                  </span>
+                  <span className="font-raleway font-semibold text-base text-[#4B5563]">
+                    /month
+                  </span>
                 </div>
-              ))}
+                <p className="mt-6 font-raleway text-base leading-7 text-[#4B5563]">
+                  {tier.description}
+                </p>
+                <ul role="list" className="mt-10 space-y-4">
+                  {tier.features.map((feature) => (
+                    <li key={feature} className="flex gap-x-3">
+                      <CheckIcon 
+                        className="h-5 w-5 flex-none text-[#CB2C30]" 
+                        aria-hidden="true" 
+                      />
+                      <span className="font-raleway text-sm text-[#4B5563]">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <Button
+                onClick={() => handlePlanSelect(tier.name)}
+                className="mt-8 w-full rounded-md bg-[#CB2C30] px-3.5 py-2 text-center font-raleway font-semibold text-sm text-white shadow-sm hover:bg-[#B32529] transition-all duration-200"
+                trackingId={`pricing-${tier.name.toLowerCase()}`}
+                trackingLocation="brand-pricing"
+              >
+                Get started today
+              </Button>
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

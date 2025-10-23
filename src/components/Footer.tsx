@@ -1,126 +1,95 @@
 import Link from 'next/link'
-import { Github, Linkedin, Twitter } from 'lucide-react'
-
-const navigation = {
-  product: [
-    { name: 'Brand', href: '/brand' },
-    { name: 'Creator', href: '/creator' },
-    { name: 'Recursos', href: '#' },
-    { name: 'Pricing', href: '#pricing' },
-  ],
-  company: [
-    { name: 'Sobre', href: '#' },
-    { name: 'Blog', href: '#' },
-    { name: 'Carreiras', href: '#' },
-    { name: 'Contato', href: '#' },
-  ],
-  legal: [
-    { name: 'Privacidade', href: '#' },
-    { name: 'Termos', href: '#' },
-    { name: 'Cookies', href: '#' },
-  ],
-  social: [
-    {
-      name: 'Twitter',
-      href: '#',
-      icon: Twitter,
-    },
-    {
-      name: 'GitHub',
-      href: '#',
-      icon: Github,
-    },
-    {
-      name: 'LinkedIn',
-      href: '#',
-      icon: Linkedin,
-    },
-  ],
-}
+import Image from 'next/image'
+import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react'
 
 export default function Footer() {
   return (
-    <footer className="bg-crafy-gray-900" aria-labelledby="footer-heading">
-      <h2 id="footer-heading" className="sr-only">
-        Footer
-      </h2>
-      <div className="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-32">
-        <div className="xl:grid xl:grid-cols-3 xl:gap-8">
-          <div className="space-y-8">
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-crafy-red rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">C</span>
-              </div>
-              <span className="text-xl font-bold text-white">Crafy</span>
+    <footer className="bg-[#242222] border-t border-[#334155]" aria-labelledby="footer-heading">
+      <h2 id="footer-heading" className="sr-only">Footer</h2>
+      
+      <div className="mx-auto max-w-7xl px-6 py-16 sm:py-24 lg:px-8">
+        {/* Main content */}
+        <div className="flex flex-col lg:flex-row lg:justify-between gap-12">
+          {/* Left - Logo and description */}
+          <div className="lg:w-4/12">
+            <div className="w-[306px] h-[83px] relative mb-8">
+              <Image
+                src="/images/logo-horizontal-preta.png"
+                alt="Crafy"
+                fill
+                className="object-contain brightness-0 invert"
+              />
             </div>
-            <p className="text-sm leading-6 text-crafy-gray-300">
-              A plataforma completa para conectar marcas e criadores de conteúdo, 
-              criando campanhas autênticas e mensuráveis.
+            <p className="font-raleway text-base leading-6 text-[#D1D5DB] mb-6">
+              We connect brands with the ideal creators through intelligent matchmaking. Build partnerships that truly resonate with your audience.
             </p>
-            <div className="flex space-x-6">
-              {navigation.social.map((item) => {
-                const Icon = item.icon
-                return (
-                  <Link key={item.name} href={item.href} className="text-crafy-gray-400 hover:text-crafy-red transition-colors">
-                    <span className="sr-only">{item.name}</span>
-                    <Icon className="h-6 w-6" aria-hidden="true" />
-                  </Link>
-                )
-              })}
+            
+            {/* Social icons */}
+            <div className="flex gap-x-6">
+              <Link href="#" className="text-[#D1D5DB] hover:text-white transition-colors">
+                <span className="sr-only">Facebook</span>
+                <Facebook className="h-6 w-6" />
+              </Link>
+              <Link href="#" className="text-[#D1D5DB] hover:text-white transition-colors">
+                <span className="sr-only">Twitter</span>
+                <Twitter className="h-6 w-6" />
+              </Link>
+              <Link href="#" className="text-[#D1D5DB] hover:text-white transition-colors">
+                <span className="sr-only">Instagram</span>
+                <Instagram className="h-6 w-6" />
+              </Link>
+              <Link href="#" className="text-[#D1D5DB] hover:text-white transition-colors">
+                <span className="sr-only">LinkedIn</span>
+                <Linkedin className="h-6 w-6" />
+              </Link>
             </div>
           </div>
-          <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
-            <div className="md:grid md:grid-cols-2 md:gap-8">
-              <div>
-                <h3 className="text-sm font-semibold leading-6 text-white">Produto</h3>
-                <ul role="list" className="mt-6 space-y-4">
-                  {navigation.product.map((item) => (
-                    <li key={item.name}>
-                      <Link href={item.href} className="text-sm leading-6 text-crafy-gray-300 hover:text-white transition-colors">
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="mt-10 md:mt-0">
-                <h3 className="text-sm font-semibold leading-6 text-white">Empresa</h3>
-                <ul role="list" className="mt-6 space-y-4">
-                  {navigation.company.map((item) => (
-                    <li key={item.name}>
-                      <Link href={item.href} className="text-sm leading-6 text-crafy-gray-300 hover:text-white transition-colors">
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+          
+          {/* Right - Links */}
+          <div className="flex flex-col sm:flex-row gap-8">
+            {/* Terms of Service */}
+            <div className="sm:w-1/3">
+              <h3 className="font-raleway font-semibold text-sm leading-6 text-[#D1D5DB] mb-4">
+                Terms of Service
+              </h3>
+              <p className="font-raleway text-sm leading-6 text-[#D1D5DB]">
+                By using our services, you agree to be bound by these terms.
+              </p>
             </div>
-            <div className="md:grid md:grid-cols-2 md:gap-8">
-              <div>
-                <h3 className="text-sm font-semibold leading-6 text-white">Legal</h3>
-                <ul role="list" className="mt-6 space-y-4">
-                  {navigation.legal.map((item) => (
-                    <li key={item.name}>
-                      <Link href={item.href} className="text-sm leading-6 text-crafy-gray-300 hover:text-white transition-colors">
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+            
+            {/* Privacy Policy */}
+            <div className="sm:w-1/3">
+              <h3 className="font-raleway font-semibold text-sm leading-6 text-[#D1D5DB] mb-4">
+                Privacy Policy
+              </h3>
+              <p className="font-raleway text-sm leading-6 text-[#D1D5DB]">
+                This policy outlines how we collect, use, and protect your personal information.
+              </p>
+            </div>
+            
+            {/* Contact */}
+            <div className="sm:w-1/3 space-y-2">
+              <h3 className="font-raleway font-semibold text-sm leading-6 text-[#D1D5DB] mb-4">
+                Contact
+              </h3>
+              <p className="font-raleway text-base text-[#D1D5DB] pl-2">
+                contact@crafyinc.com
+              </p>
+              <p className="font-raleway text-base text-[#D1D5DB] pl-2">
+                +123456000
+              </p>
+              <p className="font-raleway text-base leading-6 text-[#D1D5DB]">
+                30 N Gould ST STE R, Sheridan, WY 82801
+              </p>
             </div>
           </div>
         </div>
-        <div className="mt-16 border-t border-crafy-gray-800 pt-8 sm:mt-20 lg:mt-24">
-          <div className="flex flex-col sm:flex-row justify-between items-center">
-            <p className="text-xs leading-5 text-crafy-gray-400">
-              &copy; 2024 Crafy. Todos os direitos reservados.
-            </p>
-            <p className="text-xs leading-5 text-crafy-gray-400 mt-4 sm:mt-0">
-              Feito com ❤️ para o Web Summit Lisboa 2024
-            </p>
-          </div>
+        
+        {/* Bottom - Copyright */}
+        <div className="mt-16 pt-8 border-t border-[#9CA3AF]">
+          <p className="font-raleway text-sm text-center text-[#9CA3AF]">
+            © 2025 Crafy. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>

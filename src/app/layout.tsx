@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
-import { Inter } from 'next/font/google'
+import { Inter, Raleway } from 'next/font/google'
 import "./globals.css";
 import { Analytics } from '@vercel/analytics/react';
 
 const inter = Inter({ 
   subsets: ['latin'],
   variable: '--font-inter',
+  display: 'swap',
+})
+
+const raleway = Raleway({ 
+  subsets: ['latin'],
+  variable: '--font-raleway',
   display: 'swap',
 })
 
@@ -45,7 +51,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt" className={inter.variable}>
+    <html lang="pt" className={`${inter.variable} ${raleway.variable}`}>
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
