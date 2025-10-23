@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
-import fs from 'fs'
-import path from 'path'
+import { Resend } from 'resend'
+
+// Initialize Resend only if API key is available
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
 
 export async function POST(request: NextRequest) {
   try {
@@ -24,40 +26,35 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Save to JSON file
-    const dataDir = path.join(process.cwd(), 'data')
-    const filePath = path.join(dataDir, 'contacts.json')
-
-    // Create data directory if it doesn't exist
-    if (!fs.existsSync(dataDir)) {
-      fs.mkdirSync(dataDir, { recursive: true })
+    // Send email via Resend (only if configured)
+    if (resend) {
+      try {
+        await resend.emails.send({
+        from: 'Crafy Website <onboarding@resend.dev>',
+        to: ['vinicius@crafy.com.br', 'crafydrive@gmail.com', 'lucas@crafy.com.br'],
+        subject: `🎯 New Contact Form - ${userType === 'brand' ? 'Brand' : 'Creator'}`,
+        html: `
+          <h2>Nova submissão de formulário de contato</h2>
+          <p><strong>Tipo:</strong> ${userType === 'brand' ? '🏢 Brand' : '🎨 Creator'}</p>
+          <p><strong>Nome:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Telefone:</strong> ${phone || 'Não informado'}</p>
+          <p><strong>Empresa/Canal:</strong> ${company || 'Não informado'}</p>
+          <p><strong>Mensagem:</strong></p>
+          <p>${message || 'Nenhuma mensagem'}</p>
+          <hr>
+          <p><small>Enviado em: ${new Date().toLocaleString('pt-BR')}</small></p>
+        `,
+        })
+      } catch (emailError) {
+        console.error('Error sending email:', emailError)
+        // Continue even if email fails
+      }
+    } else {
+      console.warn('Resend not configured - email not sent')
     }
 
-    // Read existing data or initialize empty array
-    let contacts = []
-    if (fs.existsSync(filePath)) {
-      const fileContent = fs.readFileSync(filePath, 'utf-8')
-      contacts = JSON.parse(fileContent)
-    }
-
-    // Add new submission
-    const newContact = {
-      id: Date.now().toString(),
-      name,
-      email,
-      phone: phone || '',
-      company: company || '',
-      message: message || '',
-      userType,
-      timestamp: new Date().toISOString(),
-    }
-
-    contacts.push(newContact)
-
-    // Save to file
-    fs.writeFileSync(filePath, JSON.stringify(contacts, null, 2))
-
-    console.log('Contact Form Submission saved:', newContact)
+    console.log('Contact Form Submission processed:', { name, email, userType })
 
     return NextResponse.json(
       { 

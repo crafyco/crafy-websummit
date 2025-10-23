@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
-import fs from 'fs'
-import path from 'path'
+import { Resend } from 'resend'
+
+// Initialize Resend only if API key is available
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
 
 export async function POST(request: NextRequest) {
   try {
@@ -24,49 +26,30 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Save to JSON file
-    const dataDir = path.join(process.cwd(), 'data')
-    const filePath = path.join(dataDir, 'newsletter.json')
-
-    // Create data directory if it doesn't exist
-    if (!fs.existsSync(dataDir)) {
-      fs.mkdirSync(dataDir, { recursive: true })
+    // Send email notification via Resend (only if configured)
+    if (resend) {
+      try {
+        await resend.emails.send({
+        from: 'Crafy Newsletter <onboarding@resend.dev>',
+        to: ['vinicius@crafy.com.br', 'crafydrive@gmail.com', 'lucas@crafy.com.br'],
+        subject: '📧 Nova inscrição na Newsletter',
+        html: `
+          <h2>Nova inscrição na Newsletter</h2>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Fonte:</strong> Website</p>
+          <hr>
+          <p><small>Inscrito em: ${new Date().toLocaleString('pt-BR')}</small></p>
+        `,
+        })
+      } catch (emailError) {
+        console.error('Error sending newsletter notification:', emailError)
+        // Continue even if email fails
+      }
+    } else {
+      console.warn('Resend not configured - newsletter notification not sent')
     }
 
-    // Read existing data or initialize empty array
-    let subscribers = []
-    if (fs.existsSync(filePath)) {
-      const fileContent = fs.readFileSync(filePath, 'utf-8')
-      subscribers = JSON.parse(fileContent)
-    }
-
-    // Check if email already exists
-    const existingSubscriber = subscribers.find((sub: any) => sub.email === email)
-    if (existingSubscriber) {
-      return NextResponse.json(
-        { 
-          success: true, 
-          message: 'Already subscribed to newsletter',
-          email
-        },
-        { status: 200 }
-      )
-    }
-
-    // Add new subscriber
-    const newSubscriber = {
-      id: Date.now().toString(),
-      email,
-      timestamp: new Date().toISOString(),
-      source: 'website',
-    }
-
-    subscribers.push(newSubscriber)
-
-    // Save to file
-    fs.writeFileSync(filePath, JSON.stringify(subscribers, null, 2))
-
-    console.log('Newsletter Subscription saved:', newSubscriber)
+    console.log('Newsletter Subscription processed:', { email })
 
     return NextResponse.json(
       { 
