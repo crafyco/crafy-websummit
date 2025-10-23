@@ -6,7 +6,6 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import ClaraSection from '@/components/ClaraSection'
 import FeatureRollout from '@/components/FeatureRollout'
-import Testimonials from '@/components/Testimonials'
 import PartnerTopCreators from '@/components/Brand/PartnerTopCreators'
 import PricingSection from '@/components/Brand/PricingSection'
 import NewsletterSection from '@/components/Brand/NewsletterSection'
@@ -92,9 +91,6 @@ export default function BrandPage() {
 
       {/* Feature Rollout */}
       <FeatureRollout mode="brand" />
-
-      {/* Testimonials */}
-      <Testimonials />
 
       {/* Partner with top creators */}
       <PartnerTopCreators />

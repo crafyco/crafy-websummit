@@ -14,19 +14,19 @@ export default function Home() {
   }, [analytics])
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-[#FAF7F7] via-white to-[#FAF7F7] overflow-hidden">
-      {/* Background decorative elements */}
+    <div className="relative min-h-screen bg-white overflow-hidden">
+      {/* Simple background accent */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute left-[20%] top-[10%] w-[500px] h-[500px] bg-gradient-to-br from-[#CB2C30]/10 to-[#ED393D]/5 blur-3xl rounded-full" />
-        <div className="absolute right-[15%] bottom-[15%] w-[600px] h-[600px] bg-gradient-to-tl from-[#4F46E5]/10 to-[#9089FC]/5 blur-3xl rounded-full" />
+        <div className="absolute right-0 top-0 w-[500px] h-[500px] bg-[#CB2C30]/5 rounded-full blur-3xl" />
+        <div className="absolute left-0 bottom-0 w-[400px] h-[400px] bg-[#4F46E5]/5 rounded-full blur-3xl" />
       </div>
 
       {/* Logo */}
       <div className="absolute top-8 left-8 z-10">
         <Image 
           src="/images/logo-horizontal-preta.png" 
-          width={180} 
-          height={60} 
+          width={160} 
+          height={53} 
           alt="Crafy"
           priority
           className="object-contain"
@@ -39,13 +39,13 @@ export default function Home() {
           {/* Header Text */}
           <div className="text-center mb-16 space-y-6">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-200 shadow-sm mb-6">
-              <span className="w-2 h-2 bg-[#CB2C30] rounded-full animate-pulse"></span>
+              <span className="w-2 h-2 bg-[#CB2C30] rounded-full"></span>
               <span className="font-raleway text-sm text-[#6B7280]">Powered by AI</span>
             </div>
             
             <h1 className="font-raleway font-bold text-5xl sm:text-6xl lg:text-7xl text-[#111827] leading-tight">
               Connect brands with{' '}
-              <span className="bg-gradient-to-r from-[#CB2C30] to-[#ED393D] bg-clip-text text-transparent">
+              <span className="text-[#CB2C30]">
                 creators
               </span>
             </h1>
@@ -61,9 +61,8 @@ export default function Home() {
             <Link 
               href="/brand"
               onClick={() => analytics.click('home-select-brand', 'home-page')}
-              className="group relative bg-white rounded-3xl p-10 shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-[#CB2C30]/30 hover:-translate-y-2"
+              className="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-200 border border-gray-200 hover:border-[#CB2C30]/50"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-[#CB2C30]/5 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
               
               <div className="relative">
                 <div className="w-16 h-16 bg-gradient-to-br from-[#CB2C30] to-[#ED393D] rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
@@ -118,9 +117,8 @@ export default function Home() {
             <Link 
               href="/creator"
               onClick={() => analytics.click('home-select-creator', 'home-page')}
-              className="group relative bg-white rounded-3xl p-10 shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-[#4F46E5]/30 hover:-translate-y-2"
+              className="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-200 border border-gray-200 hover:border-[#4F46E5]/50"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-[#4F46E5]/5 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
               
               <div className="relative">
                 <div className="w-16 h-16 bg-gradient-to-br from-[#4F46E5] to-[#9089FC] rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
