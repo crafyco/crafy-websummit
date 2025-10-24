@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from 'react'
 import Image from 'next/image'
+import { useContactForm } from '@/contexts/ContactFormContext'
 
 interface FeatureCard {
   title: string
@@ -67,6 +68,9 @@ export default function FeatureRollout({ mode = 'brand' }: FeatureRolloutProps) 
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const features = mode === 'brand' ? brandFeatures : creatorFeatures
 
+  const { openModal } = useContactForm()
+
+
   const scrollToIndex = (index: number) => {
     if (scrollContainerRef.current) {
       const scrollAmount = index * scrollContainerRef.current.offsetWidth
@@ -98,7 +102,7 @@ export default function FeatureRollout({ mode = 'brand' }: FeatureRolloutProps) 
   return (
     <div className="w-full py-16 sm:py-20 lg:py-24">
       {/* Horizontal Scroll Container */}
-      <div 
+      <div
         ref={scrollContainerRef}
         className="flex overflow-x-scroll snap-x snap-mandatory scrollbar-hide gap-6 sm:gap-8 lg:gap-10 px-6 sm:px-10 lg:px-16"
         style={{
@@ -119,9 +123,9 @@ export default function FeatureRollout({ mode = 'brand' }: FeatureRolloutProps) 
                 <h2 className="font-raleway font-semibold text-[32px] sm:text-[36px] leading-[1.2] tracking-[-1px] text-[#111827] mb-4">
                   {feature.title}
                 </h2>
-                
+
                 <div className="border-t border-[#ABADAF] my-5"></div>
-                
+
                 {/* Image Circle - Mobile */}
                 <div className="relative w-[200px] h-[200px] mx-auto my-8">
                   <div className="absolute inset-0 rounded-full overflow-hidden shadow-lg">
@@ -133,13 +137,15 @@ export default function FeatureRollout({ mode = 'brand' }: FeatureRolloutProps) 
                     />
                   </div>
                 </div>
-                
+
                 <p className="font-raleway text-[18px] sm:text-[20px] leading-[1.6] text-[#6B7280] mb-8">
                   {feature.description}
                 </p>
-                
+
                 {feature.hasButton && (
-                  <button className="bg-[#CB2C30] rounded-md px-7 py-4 text-center font-raleway font-semibold text-lg text-white shadow-sm hover:bg-[#B32529] w-full transition-all duration-200">
+                  <button
+                    onClick={openModal}
+                    className="bg-[#CB2C30] rounded-md px-4 py-2 text-center font-raleway font-semibold text-md text-white shadow-sm hover:bg-[#B32529] w-full transition-all duration-200">
                     Want to know more
                   </button>
                 )}
@@ -151,20 +157,22 @@ export default function FeatureRollout({ mode = 'brand' }: FeatureRolloutProps) 
                   <h2 className="font-raleway font-semibold text-[42px] lg:text-[52px] xl:text-[60px] leading-[1.2] tracking-[-1.2px] text-[#111827] mb-6 lg:mb-8">
                     {feature.title}
                   </h2>
-                  
+
                   <div className="border-t border-[#ABADAF] my-6 lg:my-8"></div>
-                  
+
                   <p className="font-raleway text-[20px] lg:text-[22px] xl:text-[25px] leading-[1.5] text-[#6B7280] mb-10">
                     {feature.description}
                   </p>
-                  
+
                   {feature.hasButton && (
-                    <button className="bg-[#CB2C30] rounded-md px-7 py-4 text-center font-raleway font-semibold text-lg lg:text-xl text-white shadow-sm hover:bg-[#B32529] transition-all duration-200">
+                    <button
+                      onClick={openModal}
+                      className="bg-[#CB2C30] rounded-md px-4 py-2 text-center font-raleway font-semibold text-md text-white shadow-sm hover:bg-[#B32529] transition-all duration-200">
                       Want to know more
                     </button>
                   )}
                 </div>
-                
+
                 {/* Image Circle - Desktop */}
                 <div className="relative w-[220px] h-[220px] lg:w-[250px] lg:h-[250px] xl:w-[268px] xl:h-[268px] flex-shrink-0">
                   <div className="absolute inset-0 rounded-full overflow-hidden shadow-xl">
@@ -188,11 +196,10 @@ export default function FeatureRollout({ mode = 'brand' }: FeatureRolloutProps) 
           <button
             key={index}
             onClick={() => scrollToIndex(index)}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              currentIndex === index 
-                ? 'bg-[#CB2C30] w-8' 
+            className={`h-2 rounded-full transition-all duration-300 ${currentIndex === index
+                ? 'bg-[#CB2C30] w-8'
                 : 'bg-gray-300 hover:bg-gray-400 w-2'
-            }`}
+              }`}
             aria-label={`Go to slide ${index + 1}`}
           />
         ))}

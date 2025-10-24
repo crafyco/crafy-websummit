@@ -44,16 +44,16 @@ export function FixedAvatar() {
       <div
         className="
           absolute top-1/2 -translate-y-1/2 right-full mr-3
-          px-3 py-1 bg-gray-900 text-white text-sm font-medium
+          px-3 py-1 bg-white text-[#6B7280] text-[10px] sm:text-sm font-medium
           rounded-md shadow-lg whitespace-nowrap
-          pointer-events-none
+          pointer-events-none ring-1 ring-gray-900/10 =
         "
       >
         Get started today...
         <div className="absolute top-1/2 -translate-y-1/2 left-full w-0 h-0 
           border-t-4 border-t-transparent
           border-b-4 border-b-transparent
-          border-l-4 border-l-gray-900">
+          border-l-4 border-l-gray-900/10">
         </div>
       </div>
 

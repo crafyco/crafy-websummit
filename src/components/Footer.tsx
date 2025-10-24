@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react'
+import { Facebook, Twitter, Instagram, Linkedin, LinkIcon } from 'lucide-react'
+// import { LinkIcon } from 'lucide-react'
 
 export default function Footer() {
   return (
@@ -49,19 +50,25 @@ export default function Footer() {
           <div className="flex flex-col sm:flex-row gap-8">
             {/* Terms of Service */}
             <div className="sm:w-1/3">
-              <h3 className="font-raleway font-semibold text-sm leading-6 text-[#D1D5DB] mb-4">
-                Terms of Service
-              </h3>
+              <Link href="/terms" className="no-underline mb-2">
+                <h3 className="font-raleway font-semibold text-sm leading-6 text-[#D1D5DB] mb-4 hover:underline">
+                  <LinkIcon className="h-4 w-4 inline-block mr-1 text-[#D1D5DB]" />
+                  Terms of Service
+                </h3>
+              </Link>
               <p className="font-raleway text-sm leading-6 text-[#D1D5DB]">
                 By using our services, you agree to be bound by these terms.
               </p>
             </div>
-            
+
             {/* Privacy Policy */}
             <div className="sm:w-1/3">
-              <h3 className="font-raleway font-semibold text-sm leading-6 text-[#D1D5DB] mb-4">
-                Privacy Policy
-              </h3>
+              <Link href="/privacy" className="no-underline mb-2">
+                <h3 className="font-raleway font-semibold text-sm leading-6 text-[#D1D5DB] mb-4 hover:underline">
+                  <LinkIcon className="h-4 w-4 inline-block mr-1 text-[#D1D5DB]" />
+                  Privacy Policy
+                </h3>
+              </Link>
               <p className="font-raleway text-sm leading-6 text-[#D1D5DB]">
                 This policy outlines how we collect, use, and protect your personal information.
               </p>
@@ -72,12 +79,12 @@ export default function Footer() {
               <h3 className="font-raleway font-semibold text-sm leading-6 text-[#D1D5DB] mb-4">
                 Contact
               </h3>
-              <p className="font-raleway text-base text-[#D1D5DB] pl-2">
+              <p className="font-raleway text-base text-[#D1D5DB]">
                 contact@crafyinc.com
               </p>
-              <p className="font-raleway text-base text-[#D1D5DB] pl-2">
+              {/* <p className="font-raleway text-base text-[#D1D5DB]">
                 +123456000
-              </p>
+              </p> */}
               <p className="font-raleway text-base leading-6 text-[#D1D5DB]">
                 30 N Gould ST STE R, Sheridan, WY 82801
               </p>
